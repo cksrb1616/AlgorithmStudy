@@ -18,37 +18,45 @@ import sys
 #   - how to prevent duplication
 #       - [2,1,5,3,4]
 
-def minimumBribes(q):
+#%%
+
+
+def checkChaotic(q): 
     distance = 0
-    temp = []
+    result = True
+    for i in q:
+        distance = (i)-(q.index(i)+1)
+        if(distance>2) : 
+            print("Too chaotic")
+            return False
+            
+    return result
+def minimumBribes(q):
     count = 0
     result = 0
-    for i in q:
-        #check distance if the element is in place
-        if(i != q.index(i)+1):
-            distance = abs((i)-(q.index(i)+1))
-            if(distance >2):
-                print('Too chaotic')
-                return
-        count+=1
-    print(result)
-    
-        
-            
+    if(checkChaotic(q)):
+        for i in range(len(q)-1,-1,-1):
+            for j in range(max(0, q[i] - 2),i):
+                if q[j] > q[i]:
+                    result+=1
+        print(result)
 
 
-#return3
-test1 = [2,5,1,3,4]
-#return too chaotic
-print(minimumBribes(test1))
-test2 = [1,2,3,5,4]
-print(minimumBribes(test2))
-test3 = [2,1,5,3,4]
-print(minimumBribes(test3))
-test4 = [1,2,5,3,4,7,8,6]
-print(minimumBribes(test4))
-test5 = [5,1,2,3,7,8,6,4]
-print(minimumBribes(test5))
+
 
 
             
+test1 = [1,2,5,3,7,8,6,4]
+
+print("This is test 1 :",minimumBribes(test1))
+print("This is test 1 array :",test1)
+# test2 = [5,1,2,3,7,8,6,4]
+# print("This is test 2 :",minimumBribes(test2))
+# print("This is test 2 array :",test2)
+# test3 = [2,5,1,3,4]
+# print("This is test 3 :",minimumBribes(test3))
+
+
+
+
+# %%
